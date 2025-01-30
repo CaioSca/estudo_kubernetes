@@ -16,12 +16,15 @@ INFRA BÁSICA
     - kubeproxy: garante que comunicação entre os pods e seus serviços seja inteligente/performático (por ex.: vai direcionar o tráfego de um pod com o app pra um pod com banco do mesmo nó e não pra um pod com banco de outro nó)
     - container runtime: responsável por executar e gerenciar containers
 
-MASTER NODE
+MASTER NODE - usa menos recursos que os worker nodes
   - possui quatro serviços principais
   - API SERVER: recebe requisições do cliente, seja por API, UI ou mesmo linha de comando (kubectl). Lida com autenticação. É o gateway do Kubernetes. Da informações sobre os nós por cliente
   - SCHEDULER: inicializa os pods e joga eles nos nós corretos, baseado no uso de recursos da aplicação que vai pro pod e nos recursos dos nós. Ele chama o kubelete.
   - CONTROLLER MANAGER: detecta muanças de estado nos pods e envia requisições pro scheduler, pra que ele reviva os pods, por exemplo
   - ETCD: cérebro do master node, responsável por armazenar informações sobre os nós/pods e repassá-las para os demais serviços do master (nao armazena infos dos apps de dentro dos pods, apenas metadados dos pods em si)
+    
+CENÁRIOS ONDE PRECISA-SE DE MAIS RECURSOS
+  - basta adicionar os processos em novos nós (master ou worker) que eles já serão considerados e utilizados pelo ETCD e cia
 
 CONFIG MAP AND SERVICE
   - Para que voce nao tenha que fazer o re-deploy de uma aplicação, porque a url de conexao com o banco mudou, por exemplo. Vc muda a variavel no config map direto.
@@ -29,4 +32,7 @@ CONFIG MAP AND SERVICE
 
 VOLUMES
   - armazenamento de dados é efemero. Para lidar com isso, existem os volumes (podem ser locais ou externos)
-    
+
+
+KUBECTL - CLI DO K8 (prática pode ser com minikube, localmente)
+
